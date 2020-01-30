@@ -1,0 +1,48 @@
+<nb-layout class="main-layout">
+  <nb-layout-header fixed>
+    <div class="header-inner-container">
+      <div class="header-content">
+        <div class="left-items-container">
+          <div class="header-item">
+            <a href="#" (click)="toggleMenuSidebar()" class="toggle-menu-btn" #sidebartoggle><i class="eva eva-menu-outline"></i></a>
+          </div>
+          <div class="header-item">
+            <span class="brand">
+              <img src="assets/imgs/pm.webp" class="brand-img" (click)="sidebartoggle.click()" style="cursor: pointer; max-width: 15%;">
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="header-content">
+        <div class="right-items-container">
+          <nb-actions size="medium">
+            <nb-action class="user-avatar">
+              <nb-user [name]="currentUser.login"
+                [title]="userRole" [onlyPicture]="false" [nbContextMenu]="userMenuItems"
+                [nbContextMenuTag]="userMenuTag"></nb-user>
+            </nb-action>
+            </nb-actions>
+        </div>
+      </div>
+    </div>
+
+  </nb-layout-header>
+  <nb-sidebar class="menu-sidebar" [tag]="menuSidebarTag" responsive fixed="isMenuSidebarFixed">
+    <nb-menu [items]="menuSidebarItems"></nb-menu>
+  </nb-sidebar>
+
+  <nb-layout-column>
+
+
+    <router-outlet>
+
+    </router-outlet>
+
+
+  </nb-layout-column>
+
+  <nb-layout-footer fixed>
+    <!-- Insert footer here -->
+  </nb-layout-footer>
+
+</nb-layout>

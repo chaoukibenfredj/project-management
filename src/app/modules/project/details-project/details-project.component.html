@@ -1,0 +1,88 @@
+<div class="subheader animated fadeInDown">
+  <div class="subheader-content-container">
+    <div class="content">
+      <span class="active-route">Détails Projet</span>
+    </div>
+    <div class="content">
+      <button nbButton status="danger" size="xsmall" class="subheader-action-btn"
+      (click)="navigateToListTasks()">List des taches</button>
+
+    </div>
+  </div>
+</div>
+<div class="main-container">
+  <div class="card-container animated fadeInUp" [nbSpinner]="loadingState" nbSpinnerStatus="primary"
+    nbSpinnerSize="meduim">
+    <nb-card>
+      <nb-card-body>
+        <div class="information-container" *ngIf="!isUpdate">
+          <div class="header-container">
+          </div>
+          <div class="information-row">
+            <div class="label">
+              Id
+            </div>
+            <div class="information">
+              {{ (selectedProject && selectedProject.id) ? selectedProject.id : defaultMessage}}
+            </div>
+          </div>
+
+          <div class="information-row">
+            <div class="label">
+              Nom
+            </div>
+            <div class="information">
+              {{ (selectedProject && selectedProject.id) ? selectedProject.name : defaultMessage}}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-container" *ngIf="isUpdate">
+          <form [formGroup]="updateForm">
+            <div class="form-group">
+              <label for="name">Nom *</label>
+              <input nbInput type="text" id="name" formControlName="name" placeholder="name" required
+                class="form-control" [class.input-error]="
+                      updateForm.get('name').invalid && 
+                                        (
+                                          updateForm.get('name').dirty || 
+                                          updateForm.get('name').touched
+                                        )
+                                    ">
+              <p *ngIf="
+                    updateForm.get('name').hasError('required') && 
+                                        (
+                                          updateForm.get('name').dirty || 
+                                          updateForm.get('name').touched
+                                        )
+                                    " class="input-error-message">* Nom obligatoire</p>
+            </div>
+
+          </form>
+        </div>
+
+
+        <div class="actions-container">
+
+          <button nbButton status="danger" size="small" style="margin-left: 5px;" [nbSpinner]="deleteLoadingState"
+            nbSpinnerStatus="danger" nbSpinnerSize="xsmall" nbSpinnerMessage="" (click)="deleteProject()" *ngIf="!isUpdate">Supprimer</button>
+
+          <button nbButton status="danger" size="small" style="margin-left: 5px;" (click)="onUpdate()" *ngIf="!isUpdate"
+            nbSpinnerStatus="danger" nbSpinnerSize="xsmall" nbSpinnerMessage="">Mettre à
+            jour</button>
+
+          <button nbButton status="danger" size="small" style="margin-right: 5px;" *ngIf="isUpdate"
+            (click)="onCancel()">Annuler</button>
+
+          <button nbButton status="danger" size="small" style="margin-left: 5px;" (click)="saveUpdate()"
+            [disabled]="updateForm.invalid" [nbSpinner]="loadingState" nbSpinnerStatus="danger" *ngIf="isUpdate"
+            nbSpinnerSize="xsmall" nbSpinnerMessage="">Enregistrer</button>
+
+        </div>
+
+
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

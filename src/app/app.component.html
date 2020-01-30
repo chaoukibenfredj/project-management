@@ -1,0 +1,20 @@
+<router-outlet></router-outlet>
+
+<div class="dialog animated fadeIn" *ngIf="dialog.display">
+  <div class="dialog-card-container animated fadeInUp">
+    <nb-card>
+      <nb-card-body>
+        <div class="dialog-title-container">
+          <h4 class="title">{{ dialog.title }}</h4>
+        </div>
+        <div class="dialog-message-container">
+          <p class="message">{{ dialog.message }}</p>
+        </div>
+        <div class="dialog-actions-container">
+          <button nbButton status="basic" size="small" class="dialog-btn" (click)="onCancel()">Annuler</button>
+          <button nbButton status="danger" size="small" class="dialog-btn" (click)="onProceed()">Confirmer</button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

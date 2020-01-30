@@ -1,0 +1,69 @@
+<nb-layout>
+  <nb-layout-column>
+    <div class="main-container">
+      <div class="card-container animated fadeIn">
+        <nb-card accent="info" [nbSpinner]="loadingState" nbSpinnerStatus="primary">
+          <nb-card-body>
+            <div class="header-container">
+              <div class="header-item">
+                <span class="brand">
+                  <img src="assets/imgs/pm.webp" alt="PM Logo">
+                </span>
+              </div>
+            </div>
+            <form [formGroup]="loginFormGroup">
+              <div class="form-group row">
+                <label for="login" class="col-sm-4 col-form-label">Login</label>
+                <div class="col-sm-12">
+
+                  <input nbInput type="text" id="username" formControlName="username" placeholder="Username" required
+                    class="form-control" [class.input-error]="
+                                               loginFormGroup.get('username').invalid && 
+                                               (
+                                                 loginFormGroup.get('username').dirty || 
+                                                 loginFormGroup.get('username').touched
+                                               )
+                                           ">
+                </div>
+                <p *ngIf="
+                                           loginFormGroup.get('username').hasError('required') && 
+                                               (
+                                                 loginFormGroup.get('username').dirty || 
+                                                 loginFormGroup.get('username').touched
+                                               )
+                                           " class="input-error-message">* Username obligatoire</p>
+              </div>
+
+              <div class="form-group row">
+                <label for="password" class="col-sm-4 col-form-label">Mot de passe</label>
+                <div class="col-sm-12">
+
+                  <input nbInput type="password" id="password" formControlName="password" placeholder="Mot de passe"
+                    required class="form-control" [class.input-error]="
+                                     loginFormGroup.get('password').invalid && 
+                                     (
+                                       loginFormGroup.get('password').dirty || 
+                                       loginFormGroup.get('password').touched
+                                     )
+                                 ">
+                </div>
+                <p *ngIf="
+                                 loginFormGroup.get('password').hasError('required') && 
+                                     (
+                                       loginFormGroup.get('password').dirty || 
+                                       loginFormGroup.get('password').touched
+                                     )
+                                 " class="input-error-message">* Mot de passe obligatoire</p>
+              </div>
+              <div class="form-action">
+                <button nbButton fullWidth status="primary" size="small" (click)="onLogin()"
+                  [disabled]="loginFormGroup.invalid" [nbSpinner]="loadingState" nbSpinnerStatus="primary"
+                  nbSpinnerSize="xsmall" nbSpinnerMessage="">Se connecter</button>
+              </div>
+            </form>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+  </nb-layout-column>
+</nb-layout>

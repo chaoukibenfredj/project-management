@@ -1,0 +1,121 @@
+<div class="subheader animated fadeInDown">
+    <div class="subheader-content-container">
+      <div class="content">
+        <span class="active-route">Détails Tâche</span>
+      </div>
+      <div class="content">
+        <!-- <button nbButton status="danger" size="xsmall" class="subheader-action-btn"
+        (click)="navigateToListTasks()">List des taches</button> -->
+  
+      </div>
+    </div>
+  </div>
+  <div class="main-container">
+    <div class="card-container animated fadeInUp" [nbSpinner]="loadingState" nbSpinnerStatus="primary"
+      nbSpinnerSize="meduim">
+      <nb-card>
+        <nb-card-body>
+          <div class="information-container" *ngIf="!isUpdate">
+            <div class="header-container">
+            </div>
+            <div class="information-row">
+              <div class="label">
+                Id
+              </div>
+              <div class="information">
+                {{ (selectedTask && selectedTask.id) ? selectedTask.id : defaultMessage}}
+              </div>
+            </div>
+  
+            <div class="information-row">
+              <div class="label">
+                Nom
+              </div>
+              <div class="information">
+                {{ (selectedTask && selectedTask.id) ? selectedTask.name : defaultMessage}}
+              </div>
+            </div>
+
+            <div class="information-row">
+                <div class="label">
+                  Nom
+                </div>
+                <div class="information">
+                  {{ (selectedTask && selectedTask.id) ? selectedTask.user.firstname+' '+selectedTask.user.lastname : defaultMessage}}
+                </div>
+              </div>
+  
+          </div>
+  
+          <div class="form-container" *ngIf="isUpdate">
+            <form [formGroup]="updateForm">
+              <div class="form-group">
+                <label for="name">Nom *</label>
+                <input nbInput type="text" id="name" formControlName="name" placeholder="name" required
+                  class="form-control" [class.input-error]="
+                        updateForm.get('name').invalid && 
+                                          (
+                                            updateForm.get('name').dirty || 
+                                            updateForm.get('name').touched
+                                          )
+                                      ">
+                <p *ngIf="
+                      updateForm.get('name').hasError('required') && 
+                                          (
+                                            updateForm.get('name').dirty || 
+                                            updateForm.get('name').touched
+                                          )
+                                      " class="input-error-message">* Nom obligatoire</p>
+              </div>
+
+              <div class="form-group">
+                <label for="direction">Developpeur *</label>
+                <nb-select [nbSpinner]="loadingState" id="developper" formControlName="developper"
+                  placeholder="Sélectionner un developper" nbSpinnerStatus="danger" nbSpinnerSize="xsmall"
+                  nbSpinnerMessage="" shape="semi-round" style="width:100% ; max-width: 100%; margin: auto"
+                  [class.input-error]="
+                        updateForm.get('developper').invalid && 
+                                      (
+                                        updateForm.get('developper').dirty || 
+                                        updateForm.get('developper').touched
+                                      )
+                                  ">
+                  <nb-option *ngFor="let dev of listDev" [value]="dev.id">{{dev.firstname+' '+dev.lastname}}</nb-option>
+                </nb-select>
+                <p *ngIf="
+                      updateForm.get('developper').hasError('required') && 
+                                    (
+                                        updateForm.get('developper').dirty || 
+                                        updateForm.get('developper').touched
+                                    )
+                                " class="input-error-message">* Veuillez sélectionner un developpeur</p>
+              </div>
+  
+            </form>
+          </div>
+  
+  
+          <div class="actions-container">
+  
+            <button nbButton status="danger" size="small" style="margin-left: 5px;" [nbSpinner]="deleteLoadingState"
+              nbSpinnerStatus="danger" nbSpinnerSize="xsmall" nbSpinnerMessage="" (click)="deleteProject()" *ngIf="!isUpdate">Supprimer</button>
+  
+            <button nbButton status="danger" size="small" style="margin-left: 5px;" (click)="onUpdate()" *ngIf="!isUpdate"
+              nbSpinnerStatus="danger" nbSpinnerSize="xsmall" nbSpinnerMessage="">Mettre à
+              jour</button>
+  
+            <button nbButton status="danger" size="small" style="margin-right: 5px;" *ngIf="isUpdate"
+              (click)="onCancel()">Annuler</button>
+  
+            <button nbButton status="danger" size="small" style="margin-left: 5px;" (click)="saveUpdate()"
+              [disabled]="updateForm.invalid" [nbSpinner]="loadingState" nbSpinnerStatus="danger" *ngIf="isUpdate"
+              nbSpinnerSize="xsmall" nbSpinnerMessage="">Enregistrer</button>
+  
+          </div>
+  
+  
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+  

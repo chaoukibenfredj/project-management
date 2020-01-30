@@ -1,0 +1,189 @@
+@import "../../../themes.scss";
+@import "~@nebular/theme/styles/global/breakpoints";
+
+
+
+nb-layout.main-layout {
+
+  nb-layout-header {
+
+    .header-inner-container {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: space-between;
+      width: 100%;
+
+      .header-content {
+
+        .left-items-container,
+        .right-items-container {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          .header-item {
+            box-sizing: border-box;
+
+            .toggle-menu-btn {
+              font-size: 2.2rem;
+              text-decoration: none;
+
+              i {
+                display: block;
+              }
+            }
+
+            .logo {
+              vertical-align: middle;
+              width: 32px;
+              margin: 0 0.5rem 0 1.5rem;
+            }
+
+            .brand {
+              vertical-align: middle;
+              font-size: 1.5rem;
+              font-weight: nb-theme(font-weight-bolder);
+            }
+          }
+        }
+
+        .left-items-container {
+          justify-content: flex-start;
+        }
+
+        .right-items-container {
+          justify-content: flex-end;
+
+          nb-actions {
+            nb-action.user-avatar {
+              padding: 0rem; // 0rem 1.25rem;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .menu-sidebar {
+    z-index: 999;
+
+    nb-menu {
+
+      ::ng-deep .menu-items {
+
+        .menu-item {
+          a {
+            padding: 1rem 0.75rem;
+            align-items: baseline;
+            display: flex ; 
+
+            &:hover {
+              ::ng-deep .menu-title {
+                font-weight: nb-theme(font-weight-bold);
+              }
+            }
+
+            ::ng-deep .menu-icon {
+              width: 40px;
+              font-weight: bold;
+              font-size: 24px;
+
+            }
+
+            ::ng-deep .menu-title {
+              padding-left: 16px;
+              font-size: 18px;
+            }
+          }
+
+          ::ng-deep .active {
+
+            .menu-title {
+              font-weight: 700;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  nb-layout-column {
+    padding: 0 !important;
+  }
+
+  nb-layout-footer {
+
+    .footer-inner-container {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: space-between;
+      width: 100%;
+
+      .footer-content {
+
+        nb-select {
+
+          ::ng-deep .btn-xsmall {
+            border-color: nb-theme(form-control-border-color);
+            padding-right: 2rem;
+
+            &:hover {
+              border-color: nb-theme(form-control-border-color);
+              background-color: nb-theme(color-bg);
+              color: nb-theme(color-fg-heading);
+            }
+
+            &::after {
+              top: 42%;
+              right: 0.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  ::ng-deep .cdk-overlay-container {
+
+    ::ng-deep .select {
+      border-color: nb-theme(form-control-border-color);
+    }
+
+    ::ng-deep nb-datepicker-container {
+
+      ::ng-deep nb-card-header {
+        display: none;
+      }
+
+      ::ng-deep nb-card-body {
+
+        ::ng-deep nb-calendar-navigation {
+
+          button {
+            background-color: #3366ff;
+
+            &:hover {
+              background-color: #3366ff;
+            }
+
+            &:active {
+              background-color: #3366ff !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  ::ng-deep .cdk-overlay-pane {
+    transform: translateY(20px) !important;
+  }
+}
+
+.brand-img {
+  max-width: 30%;
+  margin-left: 15px
+}

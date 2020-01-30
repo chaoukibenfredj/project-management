@@ -1,0 +1,1 @@
+ng build --prod --base-href "https://gmatihamdi.github.io/STEGAPP/" && ngh --dir=dist/STEGAPP

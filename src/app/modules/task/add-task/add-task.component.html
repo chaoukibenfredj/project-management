@@ -1,0 +1,70 @@
+<div class="subheader animated fadeInDown">
+    <div class="subheader-content-container">
+      <div class="content">
+        <span class="active-route">Ajouter une tache pour le projet : {{(selectedProject && selectedProject.id) ? selectedProject.name : noDataMessage }}</span>
+      </div>
+      <div class="content">
+      </div>
+    </div>
+  </div>
+  <div class="main-container">
+    <div class="form-card-container animated fadeInUp">
+      <nb-card>
+        <nb-card-body>
+          <form [formGroup]="addTask">
+  
+            <div class="form-group">
+              <label for="name">Nom de la tâche *</label>
+              <input nbInput type="text" id="name" formControlName="name" placeholder="Nom de la tâche" required class="form-control"
+                [class.input-error]="
+                      addTask.get('name').invalid && 
+                                        (
+                                          addTask.get('name').dirty || 
+                                          addTask.get('name').touched
+                                        )
+                                    ">
+              <p *ngIf="
+                    addTask.get('name').hasError('required') && 
+                                        (
+                                          addTask.get('name').dirty || 
+                                          addTask.get('name').touched
+                                        )
+                                    " class="input-error-message">* name de la tâche est obligatoire</p>
+            </div>
+  
+            <div class="form-group">
+              <label for="direction">Developpeur *</label>
+              <nb-select [nbSpinner]="loadingState" id="developper" formControlName="developper"
+                placeholder="Sélectionner un developper" nbSpinnerStatus="danger" nbSpinnerSize="xsmall"
+                nbSpinnerMessage="" shape="semi-round" style="width:100% ; max-width: 100%; margin: auto"
+                [class.input-error]="
+                      addTask.get('developper').invalid && 
+                                    (
+                                      addTask.get('developper').dirty || 
+                                      addTask.get('developper').touched
+                                    )
+                                ">
+                <nb-option *ngFor="let dev of listDev" [value]="dev.id">{{dev.firstname+' '+dev.lastname}}</nb-option>
+              </nb-select>
+              <p *ngIf="
+                    addTask.get('developper').hasError('required') && 
+                                  (
+                                      addTask.get('developper').dirty || 
+                                      addTask.get('developper').touched
+                                  )
+                              " class="input-error-message">* Veuillez sélectionner un developpeur</p>
+            </div>
+
+            <div class="form-action">
+              <button nbButton status="danger" size="small" style="margin-right: 5px;"
+                (click)="onCancel()">Annuler</button>
+              <button nbButton status="danger" size="small" style="margin-left: 5px;" (click)="onAddTask()" [disabled]="
+                    addTask.invalid" [nbSpinner]="loadingState" nbSpinnerStatus="danger" nbSpinnerSize="xsmall"
+                nbSpinnerMessage="">Enregistrer</button>
+            </div>
+          </form>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+  

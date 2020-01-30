@@ -1,0 +1,35 @@
+<div class="subheader animated fadeInDown">
+  <div class="subheader-content-container">
+    <div class="content">
+      <span class="active-route">Liste des taches pour le projet : {{(selectedProject && selectedProject.id) ? selectedProject.name : noDataMessage }}</span>
+    </div>
+    <div class="content">
+      <button nbButton outline status="danger" size="xsmall" class="subheader-action-btn" *ngIf="selectedTask"
+        (click)="navigateToLigneDetails()">Détails</button>
+
+      <button nbButton status="danger" size="xsmall" class="subheader-action-btn"
+        (click)="navigateToTaskAdd()">Nouvelle Tâche</button>
+    </div>
+  </div>
+</div>
+<div class="main-container">
+  <div class="table-card-container animated fadeInUp" [nbSpinner]="loadingState" nbSpinnerStatus="primary"
+    nbSpinnerSize="meduim">
+    <nb-card>
+      <nb-card-header>
+        <form [formGroup]="filterFormGroup">
+          <div class="table-filter-container">
+            <div class="table-filter search-container">
+              <input nbInput type="text" id="search" formControlName="search" (keyup)="onSearch()"
+                placeholder="Rechercher" class="search-input">
+            </div>
+          </div>
+        </form>
+      </nb-card-header>
+      <nb-card-body>
+        <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="onRowSelect($event.data)">
+        </ng2-smart-table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
